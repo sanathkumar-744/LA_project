@@ -12,6 +12,7 @@ print(inputf.M)
 v=[]
 f=format(inputf.M)
 n=0
+
 for i in range(8,len(f)):
     o=ord(f[i])
     if(f[i]==']'):
@@ -71,8 +72,9 @@ for i in range(0,len(inputf.M)):
     j=inputf.M[i]
     if(inputf.M[i]==')'):
         break
-    if(inputf.M[i]==1 or inputf.M[i]==0 or inputf.M[i]==2 or inputf.M[i]==3 or inputf.M[i]==4 or inputf.M[i]==5 or inputf.M[i]==6 or inputf.M[i]==7 or inputf.M[i]==8 or inputf.M[i]==9 or inputf.M[i]<0):
+    if( inputf.M[i]>0 or inputf.M[i]==1 or inputf.M[i]==0 or inputf.M[i]==2 or inputf.M[i]==3 or inputf.M[i]==4 or inputf.M[i]==5 or inputf.M[i]==6 or inputf.M[i]==7 or inputf.M[i]==8 or inputf.M[i]==9 or inputf.M[i]<0):
         v.append(inputf.M[i])
+        
 for i in range(0,len(v)):
     if((i)%n==0):
         continue
@@ -80,6 +82,7 @@ for i in range(0,len(v)):
     #print(v[i],end=' ')
 
 
+print(v)
 
 
     
@@ -93,17 +96,29 @@ b=0;
 z=''
 #print("The Row echelon form of matrix M and the pivot columns : {}".format(M_rref))
 a=format(M_rref)
+for i in range(len(a)):
+    print(a[i])
 for i in range(0,len(a)):
     j=ord(a[i])
+    loi=""
     if(a[i+1]=='/' or a[i-1]=='/'):
         continue
-    if((j>=48 and j<=57)):
+    elif((j>=48 and j<=57) and (ord(a[i-1])<48 and ord(a[i+1])>57)):
         x.append(a[i])
-    
+    elif((j>=48 and j<=57) and (ord(a[i+1])>=48 and ord(a[i+1])<=57) and a[i-1]=='-'):
+        loi=a[i-1]+a[i]+a[i+1]
+        x.append(loi)
+    elif(j>=48 and j<=57 and (ord(a[i+1])!=48 or ord(a[i+1])!=49 or ord(a[i+1])!=50 or ord(a[i+1])!=51 or ord(a[i+1])!=52 or ord(a[i+1])!=53 or ord(a[i+1])!=54 or ord(a[i+1])!=55 or ord(a[i+1])!=56 or ord(a[i+1])!=56 or ord(a[i+1])!=57)  ):
+        if(a[i+1]=="]" and  (ord(a[i-1])!=48 or a[i-1]==' ' or a[i-1]==',' or ord(a[i-1])!=49 or ord(a[i-1])!=50 or ord(a[i-1])!=51 or ord(a[i-1])!=52 or ord(a[i-1])!=53 or ord(a[i-1])!=54 or ord(a[i-1])!=55 or ord(a[i-1])!=56 or ord(a[i-1])!=56 or ord(a[i-1])!=57)   ):
+            continue
+        else:
+            x.append(a[i])
+
     if(a[i]=='/'):
         z=z+a[i-1]+a[i]+a[i+1]
         x.append(z)  
     if(a[i]==')'):
+        
         break
     z=' '
 for i in range(0,len(x)):
@@ -113,8 +128,7 @@ for i in range(0,len(x)):
     #print(x[i],end=' ')
 c=0
 p=5
-
-
+print(format(M_rref))
 
 #print(v)
 
