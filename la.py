@@ -1,26 +1,83 @@
-# import sympy 
+
+import sympy 
 from sympy import * 
 from tkinter import *
 from tkinter import *
 from tkinter.ttk import *
 from PIL import ImageTk,Image
-M = Matrix([[1, 0, 1, 3], [2, 3, 4, 7], [-1, -3, -3, -4]])
-print("Matrix : {} ".format(M))
-v=[]
-n=4
- 
-print(len(M))
+import inputf
 
-for i in range(0,len(M)):
-    j=M[i]
-    if(M[i]==')'):
+
+print(inputf.M)
+v=[]
+f=format(inputf.M)
+n=0
+for i in range(8,len(f)):
+    o=ord(f[i])
+    if(f[i]==']'):
         break
-    if(M[i]==1 or M[i]==0 or M[i]==2 or M[i]==3 or M[i]==4 or M[i]==5 or M[i]==6 or M[i]==7 or M[i]==8 or M[i]==9 or M[i]<0):
-        v.append(M[i])
+    if(o>=48 and o<=57):
+        n=n+1
+    
+
+def intro():
+   
+    top = Tk()
+    
+    #top.configure(bg="rgb(2,0,36)")
+    
+    top.title("Input-Page")
+    top.geometry('1500x1500')
+    bg = PhotoImage(file = "ko.png")
+  
+# Create Canvas
+    canvas1 = Canvas( top, width = 600,
+                 height = 50)
+  
+    canvas1.pack(fill = "both", expand = True)
+  
+# Display image
+    canvas1.create_image( 0, 0, image = bg, 
+                     anchor = "nw")
+  
+# Add Text
+   # canvas1.create_text( 200, 250, text = "Welcome")
+    user_name = Label(top,
+                  text = "ROWS").place(x = 40,
+                                           y = 60) 
+   
+# the label for user_password 
+    user_password = Label(top,
+                      text = "COLUMNS").place(x = 40,
+                                               y = 100) 
+   
+
+   
+    user_name_input_area = Entry(top,
+                             width = 30).place(x = 110,
+                                               y = 60) 
+   
+    user_password_entry_area = Entry(top,
+                                 width = 30).place(x = 110,
+                                                   y = 100)
+    b=Button(top,text="PROCEED",command=top.destroy).place(x=200,y=200)
+    
+    top.mainloop()
+intro()
+
+#print(len(M))
+
+for i in range(0,len(inputf.M)):
+    j=inputf.M[i]
+    if(inputf.M[i]==')'):
+        break
+    if(inputf.M[i]==1 or inputf.M[i]==0 or inputf.M[i]==2 or inputf.M[i]==3 or inputf.M[i]==4 or inputf.M[i]==5 or inputf.M[i]==6 or inputf.M[i]==7 or inputf.M[i]==8 or inputf.M[i]==9 or inputf.M[i]<0):
+        v.append(inputf.M[i])
 for i in range(0,len(v)):
     if((i)%n==0):
-        print("\n")
-    print(v[i],end=' ')
+        continue
+        #print("\n")
+    #print(v[i],end=' ')
 
 
 
@@ -30,16 +87,19 @@ for i in range(0,len(v)):
 
 
 # Use sympy.rref() method 
-M_rref = M.rref()  
+M_rref = inputf.M.rref()  
 x=[];
 b=0;
 z=''
-print("The Row echelon form of matrix M and the pivot columns : {}".format(M_rref))
+#print("The Row echelon form of matrix M and the pivot columns : {}".format(M_rref))
 a=format(M_rref)
 for i in range(0,len(a)):
     j=ord(a[i])
+    if(a[i+1]=='/' or a[i-1]=='/'):
+        continue
     if((j>=48 and j<=57)):
         x.append(a[i])
+    
     if(a[i]=='/'):
         z=z+a[i-1]+a[i]+a[i+1]
         x.append(z)  
@@ -48,10 +108,15 @@ for i in range(0,len(a)):
     z=' '
 for i in range(0,len(x)):
     if((i)%n==0):
-        print("\n")
-    print(x[i],end=' ')
+        continue
+       # print("\n")
+    #print(x[i],end=' ')
 c=0
 p=5
+
+
+
+#print(v)
 
 def ans():
 # Create Root Object
@@ -59,7 +124,7 @@ def ans():
  
 # Set Geometry(widthxheight)
     root.geometry('1700x1500')
-    root = Tk()
+   
     
     root.configure(bg="blue")
     root.title("main")
@@ -67,18 +132,7 @@ def ans():
     l = Label(root, text = "This is root window")
  
 # Create style Object
-    style = Style()
-    
-
- 
-    '''bg = ImageTk.PhotoImage(file="kol.jpg")
-
-# Create a canvas
-    my_canvas = Canvas(root, width=1500, height=1500)
-    my_canvas.pack(fill="both", expand=True)
-
-# Set image in canvas
-    my_canvas.create_image(0,0, image=bg, anchor="nw")'''
+   # style = Style()
 
 
 #btn1.grid(row = 0, column = 3, padx = 100)
@@ -92,38 +146,40 @@ def ans():
             c=c+1
             p=5
         btn2 = Button(root, text =x[i])
-        btn2.grid(row = 1+c, column = 3+p, pady = 20, padx = 10,ipadx=10,ipady=10)
+        btn2.grid(row = 1+c, column = 3+p, pady = 20, padx = 20,ipadx=15,ipady=15)
         p=p+1
         
 
     
     root.mainloop()
+    
 root=Tk()
 root.geometry('1700x1500')
-root.title("CHINESE")
+root.title("Input-Array")
 root.configure(bg="red")
+
+  
+
 btn2 = Button(root, text ='NEXT',command=root.destroy)
 btn2.place(x=1300,y=100)
 
 
 c=0
 p=5
-
-for i in range(0,len(v
-                     )):
-    if((i)%n==0 and i!=0):
+print(len(v))
+for i in range(0,len(v)):
+    if((i)%(n)==0 and i!=0):
             c=c+1
             p=5
     btn2 = Button(root, text =v[i])
-    btn2.grid(row = 1+c, column = 3+p, pady = 20, padx = 10,ipadx=10,ipady=10)
+    btn2.grid(row = 1+c, column = 3+p, pady = 20, padx = 20,ipadx=15,ipady=15)
+    #btn2.place(x=50+c,y=50+p)
+    
     p=p+1
 
 
 
-root.mainloop()
-ans()
-
-
+ans() 
 
 
 
