@@ -1,4 +1,3 @@
-
 import sympy 
 from sympy import * 
 from tkinter import *
@@ -6,26 +5,24 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import ImageTk,Image
 import inputf
-
-
 print(inputf.M)
 v=[]
 f=format(inputf.M)
+global n
 n=0
-
 for i in range(8,len(f)):
     o=ord(f[i])
+    o1=ord(f[1+i])
     if(f[i]==']'):
         break
     if(o>=48 and o<=57):
         n=n+1
-    
-
+    if(o>=48 and o<=57 and o1>=48 and o1<=57):
+        n=n-1
 def intro():
    
     top = Tk()
     
-    #top.configure(bg="rgb(2,0,36)")
     
     top.title("Input-Page")
     top.geometry('1500x1500')
@@ -66,7 +63,6 @@ def intro():
     top.mainloop()
 intro()
 
-#print(len(M))
 
 for i in range(0,len(inputf.M)):
     j=inputf.M[i]
@@ -75,29 +71,19 @@ for i in range(0,len(inputf.M)):
     if( inputf.M[i]>0 or inputf.M[i]==1 or inputf.M[i]==0 or inputf.M[i]==2 or inputf.M[i]==3 or inputf.M[i]==4 or inputf.M[i]==5 or inputf.M[i]==6 or inputf.M[i]==7 or inputf.M[i]==8 or inputf.M[i]==9 or inputf.M[i]<0):
         v.append(inputf.M[i])
         
-for i in range(0,len(v)):
-    if((i)%n==0):
-        continue
-        #print("\n")
-    #print(v[i],end=' ')
+
 
 
 print(v)
-
-
-    
-    
-
-
 # Use sympy.rref() method 
 M_rref = inputf.M.rref()  
 x=[];
 b=0;
 z=''
+n1=0
 #print("The Row echelon form of matrix M and the pivot columns : {}".format(M_rref))
 a=format(M_rref)
-for i in range(len(a)):
-    print(a[i])
+print(a)
 for i in range(0,len(a)):
     j=ord(a[i])
     loi=""
@@ -105,53 +91,55 @@ for i in range(0,len(a)):
         continue
     elif((j>=48 and j<=57) and (ord(a[i-1])<48 and ord(a[i+1])>57)):
         x.append(a[i])
+        n1=n1+1
     elif((j>=48 and j<=57) and (ord(a[i+1])>=48 and ord(a[i+1])<=57) and a[i-1]=='-'):
         loi=a[i-1]+a[i]+a[i+1]
         x.append(loi)
+        n1=n1+1
+    elif((j>=48 and j<=57) and (ord(a[i+1])>=48 and ord(a[i+1])<=57) and a[i-1]!='-'):
+        loi=a[i-1]+a[i]+a[i+1]
+        x.append(loi)
+        n1=n1+1
     elif(j>=48 and j<=57 and (ord(a[i+1])!=48 or ord(a[i+1])!=49 or ord(a[i+1])!=50 or ord(a[i+1])!=51 or ord(a[i+1])!=52 or ord(a[i+1])!=53 or ord(a[i+1])!=54 or ord(a[i+1])!=55 or ord(a[i+1])!=56 or ord(a[i+1])!=56 or ord(a[i+1])!=57)  ):
         if(a[i+1]=="]" and  (ord(a[i-1])!=48 or a[i-1]==' ' or a[i-1]==',' or ord(a[i-1])!=49 or ord(a[i-1])!=50 or ord(a[i-1])!=51 or ord(a[i-1])!=52 or ord(a[i-1])!=53 or ord(a[i-1])!=54 or ord(a[i-1])!=55 or ord(a[i-1])!=56 or ord(a[i-1])!=56 or ord(a[i-1])!=57)   ):
             continue
         else:
             x.append(a[i])
+            n1=n1+1
 
     if(a[i]=='/'):
         z=z+a[i-1]+a[i]+a[i+1]
-        x.append(z)  
+        x.append(z)
+        n1=n1+1
     if(a[i]==')'):
         
         break
     z=' '
+print(n1)
 for i in range(0,len(x)):
     if((i)%n==0):
         continue
-       # print("\n")
-    #print(x[i],end=' ')
+    
 c=0
 p=5
-print(format(M_rref))
+#print(format(M_rref))
 
-#print(v)
+
 
 def ans():
-# Create Root Object
+
     root = Tk()
  
-# Set Geometry(widthxheight)
+
     root.geometry('1700x1500')
    
     
-    root.configure(bg="blue")
+    root.configure(bg="cyan")
     root.title("main")
  
     l = Label(root, text = "This is root window")
  
-# Create style Object
-   # style = Style()
 
-
-#btn1.grid(row = 0, column = 3, padx = 100)
- 
-# button 2
     c=0
     p=5
 
@@ -165,15 +153,11 @@ def ans():
         
 
     
-    root.mainloop()
-    
+    root.mainloop() 
 root=Tk()
 root.geometry('1700x1500')
 root.title("Input-Array")
-root.configure(bg="red")
-
-  
-
+root.configure(bg="sea green")
 btn2 = Button(root, text ='NEXT',command=root.destroy)
 btn2.place(x=1300,y=100)
 
@@ -190,8 +174,6 @@ for i in range(0,len(v)):
     #btn2.place(x=50+c,y=50+p)
     
     p=p+1
-
-
 
 ans() 
 
