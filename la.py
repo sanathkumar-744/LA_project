@@ -108,7 +108,7 @@ for i in range(0,len(a)):
             n1=n1+1
 
     if(a[i]=='/'):
-        z=z+a[i-1]+a[i]+a[i+1]
+        z=z+a[i-2]+a[i-1]+a[i]+a[i+1]
         x.append(z)
         n1=n1+1
     if(a[i]==')'):
